@@ -1,36 +1,18 @@
-import React from "react";
+import React, { useContext} from "react";
 import { Form } from "react-bootstrap";
 
 
+import {UserDataContext} from './context/UserContext'
+
 function Dashboard() {
+  let  handleChange=(e)=>{
+    console.log(e.target.value)
+  }
 
-  let data= [
-    {
-      heading: "Feedback",
-      paragraph:
-        "Lorem ipsum dolor sit amet consectetur. Sollicitudin enim risus ut vestibulum morbi tellus sit ac. Fames auctor quisque et aliquam maecenas sed at vitae facilisis. .",
-      since: "5 days ago",
-    },
-    {
-      heading: "Weekly Task",
-      paragraph:
-        "Lorem ipsum dolor sit amet consectetur. Sollicitudin enim risus ut vestibulum morbi tellus sit ac. Fames auctor quisque et aliquam maecenas sed at vitae facilisis. .",
-      since: "2 weeks ago",
-    },
-    {
-      heading: "Lyrics",
-      paragraph:
-        "Lorem ipsum dolor sit amet consectetur. Sollicitudin enim risus ut vestibulum morbi tellus sit ac. Fames auctor quisque et aliquam maecenas sed at vitae facilisis. .",
-      since: "3 weeks ago",
-    },
-    {
-      heading: "Loren ipsum",
-      paragraph:
-        "Lorem ipsum dolor sit amet consectetur. Sollicitudin enim risus ut vestibulum morbi tellus sit ac. Fames auctor quisque et aliquam maecenas sed at vitae facilisis. .",
-      since: "3 weeks ago",
-    },
-  ]; 
+  let {userData}= useContext(UserDataContext)
 
+  
+  
   return (
     <>
       <div
@@ -98,7 +80,8 @@ function Dashboard() {
             </p>
           </div>
           <div className="d-flex flex-row flex-nowrap overflow-auto" style={{paddingBottom:'5em'}}>
-            {data.map((e,i) => {
+            {
+            userData.map((e,i) => {
               return <div style={{ minWidth: "400px" }} key={i}>
                     <div
                       className="card "

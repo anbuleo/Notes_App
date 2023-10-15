@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 export const UserDataContext = React.createContext(null)
 function UserContext({children}) {
-    let data= [
+    let [userData,setData]= useState([
         {
           heading: "Feedback",
           paragraph:
@@ -26,8 +26,8 @@ function UserContext({children}) {
             "Lorem ipsum dolor sit amet consectetur. Sollicitudin enim risus ut vestibulum morbi tellus sit ac. Fames auctor quisque et aliquam maecenas sed at vitae facilisis. .",
           since: "3 weeks ago",
         },
-      ]; 
-  return <UserDataContext.Provider value={{data}} >
+      ]); 
+  return <UserDataContext.Provider value={{userData,setData}} >
   {children}
   </UserDataContext.Provider>
 }
