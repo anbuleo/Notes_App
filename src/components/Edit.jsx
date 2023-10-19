@@ -13,7 +13,7 @@ function Edit() {
     const [initialValues,setInitialValues] = useState({
       heading:"",
       paragraph:"",
-      since: new Date()
+      
       })
       const userScehma = Yup.object().shape({
         heading:Yup.string().required('* Required').min(3,'* Too short'),
