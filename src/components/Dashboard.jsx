@@ -21,6 +21,11 @@ function Dashboard() {
     console.log(newArray)
    
   }
+  let handleDelete=(index)=>{
+    let newArray=[...userData]
+  newArray.splice(index,1)
+      setData(newArray)
+  }
 
   
 
@@ -42,7 +47,7 @@ function Dashboard() {
               className="form-control  titlePlaceholder"
               type="text"
               placeholder="Title"
-              onChange={(e)=>setHeading(e.target.value)}
+              // onChange={(e)=>setHeading(e.target.value)}
             />
             <br />
             <textarea
@@ -154,6 +159,7 @@ function Dashboard() {
                             height="24"
                             viewBox="0 0 24 24"
                             fill="none"
+                            onClick={()=>handleDelete(i)}
                           >
                             <mask
                               id="mask0_209_51"
