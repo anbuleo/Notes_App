@@ -1,15 +1,28 @@
-import React, { useContext} from "react";
+import React, { useContext, useState} from "react";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 import {UserDataContext} from './context/UserContext'
 
 function Dashboard() {
+  let navigate = useNavigate()
+  let {userData,setData}= useContext(UserDataContext)
+  let [heading,setHeading] = useState("")
+  let [paragraph,setParagraph] = useState("")
+
   let  handleChange=(e)=>{
-    console.log(e.target.value)
+    let newArray = [...userData]
+    newArray.push({
+      heading,
+      paragraph
+
+    })
+    console.log(newArray)
+   
   }
 
-  let {userData}= useContext(UserDataContext)
+  
 
   
   
@@ -29,13 +42,15 @@ function Dashboard() {
               className="form-control  titlePlaceholder"
               type="text"
               placeholder="Title"
+              onChange={(e)=>setHeading(e.target.value)}
             />
             <br />
             <textarea
               className="form-control  notesPlaceholder "
               rows="3"
               placeholder="TAke a note...."
-            ></textarea>
+              onChange={(e)=>setParagraph(e.target.value)}
+              ></textarea>
           </Form>
         </div>
         <div className="cards ">
@@ -112,7 +127,8 @@ function Dashboard() {
                             width="24"
                             height="24"
                             viewBox="0 0 24 24"
-                            fill="none"
+                            fill="none" 
+                            onClick={()=>navigate(`/edit/${i}`)}
                           >
                             <mask
                               id="mask0_209_47"

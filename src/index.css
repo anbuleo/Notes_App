@@ -36,7 +36,11 @@
       background: var(--Secondary, #F5F5F5) !important;
       
    }
+   .textArea{
+    height: 8em !important;
+   }
    .notesPlaceholder{
+    
     border: none !important;
     border-left: #1c294e;
       background: var(--Secondary, #F5F5F5) !important;
