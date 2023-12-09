@@ -9,7 +9,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 function App() {
   return (
     <>
-     <div id="wrapper">
+     <div id="wrapper" >
       <BrowserRouter>
       <Sidebar/>      
       <Routes>  

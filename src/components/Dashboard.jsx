@@ -1,31 +1,46 @@
-import React, { useContext, useState} from "react";
-import { Form } from "react-bootstrap";
+import React, { useContext, useEffect, useState} from "react";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 
 import {UserDataContext} from './context/UserContext'
 
 function Dashboard() {
   let navigate = useNavigate()
+  
   let {userData,setData}= useContext(UserDataContext)
-  let [heading,setHeading] = useState("")
-  let [paragraph,setParagraph] = useState("")
-
-  let  handleChange=(e)=>{
-    let newArray = [...userData]
-    newArray.push({
-      heading,
-      paragraph
-
+  
+  const [initialValues,setInitialValues] = useState({
+    heading:"",
+    paragraph:"",
+    
     })
-    console.log(newArray)
+    const userScehma = Yup.object().shape({
+      heading:Yup.string().required('* Required').min(3,'* Too short'),
+      paragraph:Yup.string().required("* REquired").min(20,'* Too short')
+    })
+
+  // let  handleChangeSubmit=(e)=>{
+  //   e.preventDefault()
+  //   let newArray = [...userData]
+  //   newArray.push({
+  //     heading,
+  //     paragraph
+
+  //   })
+  //   console.log(newArray)
    
-  }
+  // }
   let handleDelete=(index)=>{
     let newArray=[...userData]
   newArray.splice(index,1)
       setData(newArray)
   }
+  useEffect(()=>{
+    // console.log(userData)
+  },[userData])
 
   
 
@@ -38,7 +53,54 @@ function Dashboard() {
         style={{ backgroundColor: " #E3E8F8" }}
       >
         <div className="topForm">
-          <Form className=" headForm">
+        <Formik
+        initialValues={initialValues}
+        validationSchema={userScehma}
+        enableReinitialize={true}
+        onSubmit={(values)=>{
+          let newArray = [...userData]//immutable deep copy
+          newArray.push(values)
+          setData(newArray)
+          // console.log(values)
+        }}
+        >
+            {({ values,errors,touched,handleBlur,handleSubmit,handleChange})=>(<Form onSubmit={handleSubmit} className=" headForm">
+        <Form.Group>
+            <Form.Label>
+              Add a Note
+            </Form.Label>
+            {/* <br /> */}
+            <Form.Control
+              className="form-control  titlePlaceholder"
+              type="text"
+              placeholder="Title"
+              name='heading'
+              value = {values.heading}
+              onBlur={handleBlur} onChange={handleChange}
+            //   onChange={(e)=>console.log(userData,e)}
+            />
+            {errors.heading && touched.heading ? <div style={{color:"red"}}>{errors.heading}</div>:null}
+            </Form.Group>
+            <br />
+            <Form.Group>
+            <textarea
+              className="form-control  notesPlaceholder "
+              rows="3"
+              placeholder="TAke a note...."
+              name='paragraph'
+              value = {values.paragraph}
+              onBlur={handleBlur} onChange={handleChange}
+            //   onChange={(e)=>setParagraph(e.target.value)}
+              ></textarea>
+              {errors.paragraph && touched.paragraph ? <div style={{color:"red"}}>{errors.paragraph}</div>:null}
+              </Form.Group>
+
+              <Button className="mt-2" type='submit'>submit</Button>
+          </Form>
+          )}
+          
+        </Formik>
+          {/* <Form className=" headForm" ref={formRef} onSubmit={handleChange}>
             <label>
               <span>Add a Note</span>
             </label>
@@ -47,7 +109,7 @@ function Dashboard() {
               className="form-control  titlePlaceholder"
               type="text"
               placeholder="Title"
-              // onChange={(e)=>setHeading(e.target.value)}
+              onChange={(e)=>setHeading(e.target.value)}
             />
             <br />
             <textarea
@@ -55,8 +117,9 @@ function Dashboard() {
               rows="3"
               placeholder="TAke a note...."
               onChange={(e)=>setParagraph(e.target.value)}
+             
               ></textarea>
-          </Form>
+          </Form> */}
         </div>
         <div className="cards ">
           <div className="mainTopic">

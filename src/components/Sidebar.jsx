@@ -1,8 +1,9 @@
 import React from 'react'
 
 function Sidebar() {
-  return <>
-  <ul className="navbar-nav sidebar titleName " style={{backgroundColor:' #F5F5F5'}} id="accordionSidebar">
+  return <div className='d-flex'>
+  
+  <ul className="navbar-nav sidebar titleName "  style={{backgroundColor:' #F5F5F5'}} id="sidebar" >
 
 
 
@@ -39,7 +40,7 @@ function Sidebar() {
 
 </ul>
 
-  </>
+  </div>
 }
 
 export default Sidebar
