@@ -15,7 +15,7 @@ function App() {
       <Routes>  
        <Route path="dashboard" element={<UserContext><Dashboard/></UserContext>} />
       <Route path="/edit/:id" element={ <UserContext> <Edit/></UserContext>}/>
-      <Route path='/*' element={<Navigate to='/dashboard'/>}/>
+      <Route path='/*' element={<Navigate to='dashboard'/>}/>
       </Routes>
       </BrowserRouter>
    
