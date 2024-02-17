@@ -49,7 +49,7 @@ function Edit() {
             let newArray = [...userData]//immutable deep copy
             newArray.splice(params.id,1,values)
             setData(newArray)//state update
-            navigate('/dashboard')
+            navigate('/')
           }}
         >
             {({ values,errors,touched,handleBlur,handleSubmit,handleChange})=>(<Form onSubmit={handleSubmit} className=" headForm">
