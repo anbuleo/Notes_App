@@ -19,7 +19,7 @@ function Dashboard() {
     })
     const userScehma = Yup.object().shape({
       heading:Yup.string().required('* Required').min(3,'* Too short'),
-      paragraph:Yup.string().required("* REquired").min(20,'* Too short')
+      paragraph:Yup.string().required("* REquired").min(20,'* Too short minimum 20 characters')
     })
 
   // let  handleChangeSubmit=(e)=>{
@@ -57,10 +57,12 @@ function Dashboard() {
         initialValues={initialValues}
         validationSchema={userScehma}
         enableReinitialize={true}
-        onSubmit={(values)=>{
+        onSubmit={(values,{resetForm})=>{
           let newArray = [...userData]//immutable deep copy
           newArray.push(values)
           setData(newArray)
+          resetForm()
+          
           // console.log(values)
         }}
         >
